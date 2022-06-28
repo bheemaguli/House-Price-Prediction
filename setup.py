@@ -8,7 +8,7 @@ DESCRIPTION="This is a ritualistic Machine Learning project."
 REQUIREMENTS_FILE="requirements.txt"
 
 def get_requirements_list()->List[str]:
-    with open(REQUIREMENTS_FILE) as requirement_file:
+    with open(REQUIREMENTS_FILE, encoding='utf-16', mode='r') as requirement_file:
         return requirement_file.readlines().remove("-e .")
 
 

@@ -1,25 +1,49 @@
-{% extends "bootstrap/base.html" %}
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        {% block styles %}
+        <!-- Bootstrap CSS -->
+        {{ bootstrap.load_css() }}
+        {% endblock %}
+        
+        <title>ML Project</title>
+        {% endblock %}
 
-{% block title %}Flasky{% endblock %}
+        {% block navbar %}
+        <!-- Image and text -->
+        <nav class="navbar navbar-light navbar-static-top" style="background-color: #751cbe;" role="navigation">
+            <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}" style="color: #ffffff">
+                <img
+                src="static/favicon.ico"
+                class="me-2"
+                height="45"
+                alt="MDB Logo"
+                loading="lazy"
+                />
+                Home Price Prediction
+            </a>
+            <div><button type="button" class="btn btn-outline-light" style="margin-right:10px">
+                Data
+              </button><button type="button" class="btn btn-outline-light" style="margin-right:4px">
+                EDA
+              </button>
+            </div>
+            </div>
+        </nav>
+        {% endblock %}
+    </head>
+    <body>
+        <!-- Your page content -->
+        {% block content %}{% endblock %}
 
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-light navbar-static-top" style="background-color: #751cbe;" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ url_for('index') }}" style="color: #ffffff">Flasky</a>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block content %}
-<div class="container">
-{% block page_content %}{% endblock %}
-</div>
-{% endblock %}
+        <!--{% block scripts %}
+            {{ bootstrap.load_js() }}
+        {% endblock %}-->
+    </body>
+</html>

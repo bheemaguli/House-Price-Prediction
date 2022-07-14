@@ -1,11 +1,11 @@
 from flask import Flask, render_template, url_for
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap5
 from housing.logger import logging
 from housing.exception import HousingException
 import sys
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap5(app)
 
 
 @app.route('/', methods=['GET', 'POST'])

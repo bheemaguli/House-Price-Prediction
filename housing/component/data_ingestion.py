@@ -37,7 +37,7 @@ class DataIngestion:
             tgz_file_path = os.path.join(tgz_download_dir, housing_file_name)
             
             logging.info(f'Downloading file from :[{download_url}] into [{tgz_file_path}]')
-            urllib.request.urlretrive(download_url, tgz_file_path)
+            urllib.request.urlretrieve(download_url, tgz_file_path)
             logging.info(f'File :[{tgz_file_path}] has been downloaded successfully')
             
             return tgz_file_path
@@ -73,7 +73,7 @@ class DataIngestion:
             housing_dataFrame['income_cat'] = pd.cut(
                 housing_dataFrame['median_income'],
                 bins=[0.0, 1.5, 3.0, 4.5, 6.0, np.inf],
-                levels=[1, 2, 3, 4, 5]
+                labels=[1, 2, 3, 4, 5]
             )
             
             
@@ -81,7 +81,7 @@ class DataIngestion:
             strat_train_set = None
             strat_test_set = None
             
-            split = StratifiedShuffleSplit(n_split=1,
+            split = StratifiedShuffleSplit(n_splits=1,
                                            test_size=0.2,
                                            random_state=42)
             
@@ -98,19 +98,19 @@ class DataIngestion:
                                           file_name)
             
             if strat_train_set is not None:
-                os.mkdirs(self.data_ingestion_config.ingested_train_dir, exist_ok=True)
+                os.makedirs(self.data_ingestion_config.ingested_train_dir, exist_ok=True)
                 logging.info(f'Exporting training dataset to file :[{train_file_path}]')
                 strat_train_set.to_csv(train_file_path, index=False)
                 
             if strat_test_set is not None:
-                os.mkdirs(self.data_ingestion_config.ingested_test_dir, exist_ok=True)
+                os.makedirs(self.data_ingestion_config.ingested_test_dir, exist_ok=True)
                 logging.info(f'Exporting testing dataset to file :[{test_file_path}]')
                 strat_test_set.to_csv(test_file_path, index=False)
             
-            data_ingestion_artifact = DataIngestionArtifact(train_file_path, test_file_path,
-                                  test_file_path=test_file_path,
-                                  is_ingested=True,
-                                  message='Data ingestion completed successfully.')
+            data_ingestion_artifact = DataIngestionArtifact(train_file_path=train_file_path,
+                                                            test_file_path=test_file_path,
+                                                            is_ingested=True,
+                                                            message='Data ingestion completed successfully.')
             logging.info(f'Data Ingestion Artifact :[{data_ingestion_artifact}]')
             
             return data_ingestion_artifact

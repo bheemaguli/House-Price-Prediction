@@ -6,10 +6,15 @@ VERSION="0.0.2"
 AUTHOR="Sumanth Kashyap"
 DESCRIPTION="This is a ritualistic Machine Learning project."
 REQUIREMENTS_FILE="requirements.txt"
+HYPHEN_E_DOT = "-e ."
 
 def get_requirements_list()->List[str]:
     with open(REQUIREMENTS_FILE, encoding='utf-16', mode='r') as requirement_file:
-        return requirement_file.readlines().remove("-e .")
+        requirement_list = requirement_file.readlines()
+        requirement_list = [requirement_name.replace("\n", "") for requirement_name in requirement_list]
+        if HYPHEN_E_DOT in requirement_list:
+            requirement_list.remove(HYPHEN_E_DOT)
+        return requirement_list
 
 
 setup(

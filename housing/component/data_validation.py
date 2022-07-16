@@ -19,6 +19,7 @@ class DataValidation:
     def __init__(self, data_validation_config:DataValidationConfig,
         data_ingestion_artifact:DataIngestionArtifact):
         try:
+            logging.info(f"{'='*20}Data Validation log started.{'='*20}")
             self.data_validation_config = data_validation_config
             self.data_ingestion_artifact = data_ingestion_artifact
         except Exception as e:
@@ -27,8 +28,10 @@ class DataValidation:
 
     def get_train_and_test_df(self):
         try:
+            logging.info(f"Proceeding to get train and test datasets for validations.")
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
+            logging.info(f"Train and test datasets extracted as dataframes.")
             return train_df,test_df
         except Exception as e:
             raise HousingException(e,sys) from e
@@ -64,6 +67,7 @@ class DataValidation:
     
     def validate_dataset_schema(self)->bool:
         try:
+            logging.info(f"Checking if training and test file fits the schema.")
             validation_status = False
             
             scheme_file_path = self.data_validation_config.schema_file_path
@@ -99,6 +103,7 @@ class DataValidation:
 
     def get_and_save_data_drift_report(self):
         try:
+            logging.info(f"Proceeding to get train and test datasets drift analysis.")
             profile = Profile(sections=[DataDriftProfileSection()])
 
             train_df,test_df = self.get_train_and_test_df()
@@ -113,12 +118,14 @@ class DataValidation:
 
             with open(report_file_path,"w") as report_file:
                 json.dump(report, report_file, indent=6)
+            logging.info(f"Dataset drift analysis completed.")
             return report
         except Exception as e:
             raise HousingException(e,sys) from e
 
     def save_data_drift_report_page(self):
         try:
+            logging.info(f"Proceeding to save drift analysis reports.")
             dashboard = Dashboard(tabs=[DataDriftTab()])
             train_df,test_df = self.get_train_and_test_df()
             dashboard.calculate(train_df,test_df)
@@ -128,6 +135,7 @@ class DataValidation:
             os.makedirs(report_page_dir,exist_ok=True)
 
             dashboard.save(report_page_file_path)
+            logging.info(f"Dataset drift analysis report saved successfully.")
         except Exception as e:
             raise HousingException(e,sys) from e
 
@@ -135,7 +143,12 @@ class DataValidation:
         try:
             report = self.get_and_save_data_drift_report()
             self.save_data_drift_report_page()
-            return True
+            
+            report_page_file_path = self.data_validation_config.report_page_file_path
+            report_file_exists = os.path.exists(report_page_file_path)
+            
+            logging.info(f"Does drift analysis report exists? -> {report_file_exists}")
+            return report_file_exists
         except Exception as e:
             raise HousingException(e,sys) from e
 
@@ -154,3 +167,6 @@ class DataValidation:
             logging.info(f"Data validation artifact: {data_validation_artifact}")
         except Exception as e:
             raise HousingException(e,sys) from e
+        
+    def __del__(self):
+        logging.info(f"{'='*20}Data Validation log completed.{'='*20}")

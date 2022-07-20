@@ -5,10 +5,10 @@ from housing.config.config import Configuartion
 import os
 def main():
     try:
-        logging.info(f"Project run started")
+        logging.info(f"{'*'*50}Project run started{'*'*50}")
         pipeline = Pipeline()
-        pipeline.run_pipeline()
-        logging.info(f"Project run completed")
+        pipeline.start()
+        logging.info(f"{'*'*50}Project run completed{'*'*50}")
     except Exception as e:
         logging.error(f"{e}")
         print(e)

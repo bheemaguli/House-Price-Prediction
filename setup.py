@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from typing import List
 
 PROJECT_NAME="house-price-predictor"
-VERSION="0.0.2"
+VERSION="0.0.3"
 AUTHOR="Sumanth Kashyap"
 DESCRIPTION="This is a ritualistic Machine Learning project."
 REQUIREMENTS_FILE="requirements.txt"

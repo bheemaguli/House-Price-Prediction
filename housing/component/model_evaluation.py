@@ -101,11 +101,6 @@ class ModelEvaluation:
             test_target_arr = np.array(test_dataframe[target_column_name])
             logging.info(f"Conversion completed target column into numpy array.")
 
-            logging.info(f"Converting target column into numpy array.")
-            train_target_arr = np.array(train_dataframe[target_column_name])
-            test_target_arr = np.array(test_dataframe[target_column_name])
-            logging.info(f"Conversion completed target column into numpy array.")
-
             # dropping target column from the dataframe
             logging.info(f"Dropping target column from the dataframe.")
             train_dataframe.drop(target_column_name, axis=1, inplace=True)

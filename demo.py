@@ -6,9 +6,9 @@ import os
 def main():
     try:
         logging.info(f"{'*'*50}Project run started{'*'*50}")
-        pipeline = Pipeline()
+        config_path = os.path.join("config","config.yaml")
+        pipeline = Pipeline(Configuartion(config_file_path=config_path))
         pipeline.start()
-        logging.info(f"{'*'*50}Project run completed{'*'*50}")
     except Exception as e:
         logging.error(f"{e}")
         print(e)
@@ -17,3 +17,4 @@ def main():
 
 if __name__=="__main__":
     main()
+    logging.info(f"{'*'*50}Project run completed{'*'*50}")

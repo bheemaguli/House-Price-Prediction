@@ -21,19 +21,15 @@ import os, sys, uuid
 Experiment = namedtuple("Experiment",["experiment_id","initialization_timestamp","artifact_time_stamp",
 "running_status","start_time","stop_time","execution_time","message","experiment_file_path"])
 
-config = Configuartion()
-os.makedirs(config.training_pipeline_config.artifact_dir,exist_ok=True)
 
 class Pipeline(Thread):
-    
-    experiment:Experiment=Experiment(*([None]*9))
-   
-    experiment_file_path = os.path.join(config.training_pipeline_config.artifact_dir,
-    EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME)
+    experiment:Experiment = Experiment(*([None] * 11))
+    experiment_file_path = None
 
-
-    def __init__(self, config: Configuartion = config) -> None:
+    def __init__(self, config: Configuartion ) -> None:
         try:
+            os.makedirs(config.training_pipeline_config.artifact_dir, exist_ok=True)
+            Pipeline.experiment_file_path=os.path.join(config.training_pipeline_config.artifact_dir,EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME)
             super().__init__(daemon=False, name="pipeline")
             self.config=config
         except Exception as e:

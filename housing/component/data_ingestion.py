@@ -1,7 +1,3 @@
-from dataclasses import dataclass
-from email.contentmanager import raw_data_manager
-from operator import is_
-import sys,os
 from housing.entity.config_entity import DataIngestionConfig
 from housing.exception import HousingException
 from housing.logger import logging
@@ -10,6 +6,7 @@ import tarfile
 from six.moves import urllib
 import pandas as pd
 import numpy as np
+import sys,os
 from sklearn.model_selection import StratifiedShuffleSplit
 
 class DataIngestion:
@@ -45,7 +42,7 @@ class DataIngestion:
         except Exception as e:
             raise HousingException(e,sys) from e
     
-    def extract_tgz_file(self, tgz_file_path):
+    def extract_tgz_file(self, tgz_file_path:str):
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir
             if os.path.exists(raw_data_dir):
@@ -59,7 +56,7 @@ class DataIngestion:
         except Exception as e:
             raise HousingException(e,sys) from e
     
-    def split_data_as_train_test(self):
+    def split_data_as_train_test(self) -> DataIngestionArtifact:
         try:
             raw_data_dir = self.data_ingestion_config.raw_data_dir
             

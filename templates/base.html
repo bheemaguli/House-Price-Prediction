@@ -5,13 +5,14 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel = "icon" href ="static/favicon.ico" type = "image/x-icon">
         
         {% block styles %}
         <!-- Bootstrap CSS -->
         {{ bootstrap.load_css() }}
         {% endblock %}
         
-        <title>ML Project</title>
+        <title>Housing Price Prediction </title>
         {% endblock %}
 
         {% block navbar %}
@@ -26,13 +27,21 @@
                 alt="MDB Logo"
                 loading="lazy"
                 />
-                Home Price Prediction
+                Housing Price Prediction
             </a>
-            <div><button type="button" class="btn btn-outline-light" style="margin-right:10px">
-                Data
-              </button><button type="button" class="btn btn-outline-light" style="margin-right:4px">
-                EDA
-              </button>
+            <div>
+                <a href="{{ url_for('index') }}" class="btn btn-info" role="button" style="margin-right:10px">
+                    Home
+                </a>
+                <a href="{{ url_for('roadmap') }}" class="btn btn-info" role="button" style="margin-right:10px">
+                    Roadmap
+                </a>
+                <a href="{{ url_for('data') }}" class="btn btn-info" role="button" style="margin-right:10px">
+                    Data
+                </a>
+                <a href="{{ url_for('eda') }}" class="btn btn-info" role="button" style="margin-right:10px">
+                    EDA
+                </a>
             </div>
             </div>
         </nav>

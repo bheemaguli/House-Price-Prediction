@@ -1,5 +1,3 @@
-from inspect import trace
-from urllib.parse import scheme_chars
 from housing.logger import logging
 from housing.exception import HousingException
 from housing.entity.config_entity import DataValidationConfig

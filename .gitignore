@@ -131,3 +131,4 @@ dmypy.json
 
 # Custom Entries
 housing/artifact
+saved_models/*

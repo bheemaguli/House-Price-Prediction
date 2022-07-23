@@ -94,13 +94,13 @@ def evaluate_regression_model(model_list: list,
 
             #logging all important metric
             logging.info(f"{'='*20}Score{'='*20}")
-            logging.info(f"Train Score   - {train_acc}")
-            logging.info(f"Test Score    - {test_acc}")
-            logging.info(f"Average Score - {model_accuracy}")
+            logging.info(f"Train Score              :[{train_acc}]")
+            logging.info(f"Test Score               :[{test_acc}]")
+            logging.info(f"Average Score            :[{model_accuracy}]")
             logging.info(f"{'='*20}Loss{'='*20}")
-            logging.info(f"Diff test-train accuracy: [{diff_test_train_acc}].") 
-            logging.info(f"Train RMS_ERROR:          [{train_rmse}].")
-            logging.info(f"Test RMS_ERROR :          [{test_rmse}].")
+            logging.info(f"Diff test-train accuracy :[{diff_test_train_acc}].") 
+            logging.info(f"Train RMS_ERROR          :[{train_rmse}].")
+            logging.info(f"Test RMS_ERROR           :[{test_rmse}].")
 
 
             #if model accuracy is greater than base accuracy and train and test score is within certain thershold

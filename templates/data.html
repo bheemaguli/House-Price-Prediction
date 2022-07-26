@@ -11,6 +11,24 @@
      page to see the project progress 
     or see the code at my
     <a href="https://github.com/bheemaguli/House-Price-Prediction" class="link-info" target="_blank">github</a>.
+    <br>
+    For now, only the following domains have been setup/under construction.
 </p>
 </div>
+<div class="container py-4">
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+        <div class="h-60 p-5 bg-light border rounded-3">
+          <h2>Project Logs</h2>
+          <p>You can find the logs of the model training runs in the link below.</p>
+          <a href="{{ url_for('render_log_dir') }}" class="btn btn-outline-secondary" type="button">Logs</a>
+        </div>
+    </div>
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+        <div class="h-60 p-5 bg-light border rounded-3">
+          <h2>Project Artifact Data</h2>
+          <p>You can find the project artifact data that was crerated during the training of model.</p>
+          <a href="{{ url_for('render_artifact_dir') }}" class="btn btn-outline-secondary" type="button">Artifacts</a>
+        </div>
+    </div>
+  </div>
 {% endblock %}

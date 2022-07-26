@@ -5,7 +5,7 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel = "icon" href ="static/favicon.ico" type = "image/x-icon">
+        <link rel = "icon" href ="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
         
         {% block styles %}
         <!-- Bootstrap CSS -->
@@ -21,7 +21,7 @@
             <div class="container">
             <a class="navbar-brand" href="{{ url_for('index') }}" style="color: #ffffff">
                 <img
-                src="static/favicon.ico"
+                src="{{ url_for('static', filename='favicon.ico') }}"
                 class="me-2"
                 height="45"
                 alt="MDB Logo"

@@ -130,5 +130,30 @@ dmypy.json
 
 
 # Custom Entries
-housing/artifact
-saved_models/*
+# Demo Files
+# https://stackoverflow.com/a/72380673 solution for nested exclude
+/housing/artifact/*
+
+!/housing/artifact/data_ingestion
+/housing/artifact/data_ingestion/*
+!/housing/artifact/data_ingestion/2022-07-26-11-14-30
+
+!/housing/artifact/data_transformation
+/housing/artifact/data_transformation/*
+!/housing/artifact/data_transformation/2022-07-26-11-14-30
+
+!/housing/artifact/data_validation
+/housing/artifact/data_validation/*
+!/housing/artifact/data_validation/2022-07-26-11-14-30
+
+!/housing/artifact/experiment
+!/housing/artifact/model_evaluation
+
+!/housing/artifact/model_trainer
+/housing/artifact/model_trainer/*
+!/housing/artifact/model_trainer/2022-07-26-11-14-30
+
+/saved_models/*
+!/saved_models/20220726111622
+
+!*log_2022-07-26-11-14-30.log

@@ -85,7 +85,7 @@ def render_artifact_dir(req_path):
     }
     return render_template('files.html', result=result)
 
-@app.route('/data/view_experiment_hist', methods=['GET', 'POST'])
+@app.route('/view_experiment_hist', methods=['GET', 'POST'])
 def view_experiment_history():
     pipeline = Pipeline(config=Configuartion(current_time_stamp=get_current_time_stamp()))
     experiment_df = pipeline.get_experiments_status()
@@ -95,7 +95,7 @@ def view_experiment_history():
     return render_template('experiment_history.html', context=context)
 
 
-@app.route('/data/train', methods=['GET', 'POST'])
+@app.route('/train', methods=['GET', 'POST'])
 def train():
     message = ""
     pipeline = Pipeline(config=Configuartion(current_time_stamp=get_current_time_stamp()))
@@ -150,8 +150,8 @@ def predict():
     return render_template("predict.html", context=context)
 
 
-@app.route('/data/saved_models', defaults={'req_path': 'saved_models'})
-@app.route('/data/saved_models/<path:req_path>')
+@app.route('/saved_models', defaults={'req_path': 'saved_models'})
+@app.route('/saved_models/<path:req_path>')
 def saved_models_dir(req_path):
     os.makedirs("saved_models", exist_ok=True)
     print(f"req_path: {req_path}")
@@ -170,10 +170,10 @@ def saved_models_dir(req_path):
         "parent_folder": os.path.dirname(abs_path),
         "parent_label": abs_path
     }
-    return render_template('saved_models_files.html', result=result)
+    return render_template('saved_models.html', result=result)
 
 
-@app.route("/data/update_model_config", methods=['GET', 'POST'])
+@app.route("/update_model_config", methods=['GET', 'POST'])
 def update_model_config():
     try:
         if request.method == 'POST':
@@ -192,7 +192,7 @@ def update_model_config():
         return str(e)
 
 
-@app.route(f'/data/logs', defaults={'req_path': f'{LOG_FOLDER_NAME}'})
+@app.route(f'/logs', defaults={'req_path': f'{LOG_FOLDER_NAME}'})
 @app.route(f'/{LOG_FOLDER_NAME}/<path:req_path>')
 def render_log_dir(req_path):
     os.makedirs(LOG_FOLDER_NAME, exist_ok=True)

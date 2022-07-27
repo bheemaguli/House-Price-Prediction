@@ -206,6 +206,7 @@ class Pipeline(Thread):
         try:
             if os.path.exists(Pipeline.experiment_file_path):
                 df= pd.read_csv(Pipeline.experiment_file_path)
+                df.fillna('', inplace=True)
                 limit=-1*int(limit)
                 return  df[limit:].drop(columns=["experiment_file_path","initialization_timestamp"],axis=1)
             else:

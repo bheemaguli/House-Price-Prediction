@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Prediction - Unexpected Error</title>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-<div class="page-header" style="margin-top:40px;">
+    <a class="btn btn-info" type="button" href="{{ url_for('index') }}" style="margin-bottom:20px;margin-top: 30px;">
+        <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
+      Home</a>
+<div class="page-header">
     <h3>Error Encountered!</h3>
 </div>
 </div>

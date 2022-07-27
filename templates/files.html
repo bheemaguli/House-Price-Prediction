@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<title>Project Artifacts</title>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <div style="margin-top:50px;"></div>
-
     {% if "housing" in result['parent_folder'] %}
-        <a class="btn btn-info" type="button" href="/artifact/{{result['parent_folder']}}" style="margin-bottom:20px;">
+        <a class="btn btn-info" type="button" href="/artifact/{{result['parent_folder']}}" style="margin-bottom:20px;margin-top: 30px;">
             <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
             Back
         </a>
@@ -13,6 +15,10 @@
         <h4 style="text-align:center; margin-bottom:70px;">
             {{result['parent_label']}}
         </h4>
+    {% else %}
+    <a class="btn btn-info" type="button" href="{{ url_for('data') }}" style="margin-bottom:20px;margin-top: 30px;">
+        <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
+      Back</a>
     {% endif %}
 
     <div class="row">

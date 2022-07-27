@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Housing Price Prediction</title>
+{% endblock %}
+
 {% block content %}
 <div class="container">
 <div class="page-header" style="margin-top:40px">
@@ -13,5 +17,24 @@
     or see the code at my
     <a href="https://github.com/bheemaguli/House-Price-Prediction" class="link-info" target="_blank">github</a>.
 </p>
+
+<a>All current project links are as follows</a>
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group mr-2" role="group" style="margin-right: 10px;">
+      <a type="button" class="btn btn-secondary" href="{{ url_for('render_log_dir') }}">Logs</a>
+    </div>
+    <div class="btn-group mr-2" role="group" style="margin-right: 10px;">
+      <a type="button" class="btn btn-secondary" href="{{ url_for('render_artifact_dir') }}">Artifacts</a>
+    </div>
+    <div class="btn-group" role="group" style="margin-right: 10px;">
+        <a type="button" class="btn btn-secondary" href="{{ url_for('predict') }}">Estimate</a>
+    </div>
+    <div class="btn-group" role="group" style="margin-right: 10px;">
+        <a type="button" class="btn btn-secondary" href="{{ url_for('saved_models_dir') }}">Saved Models</a>
+    </div>
+    <div class="btn-group" role="group" style="margin-right: 10px;">
+        <a type="button" class="btn btn-secondary" href="{{ url_for('view_experiment_history') }}">Experiment History</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

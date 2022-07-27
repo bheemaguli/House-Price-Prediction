@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Project Data</title>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-<div class="page-header" style="margin-top:40px">
+  <a class="btn btn-info" type="button" href="{{ url_for('index') }}" style="margin-bottom:20px;margin-top: 30px;">
+    <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
+  Home</a>
+<div class="page-header">
     <h1>Hello, Stranger!</h1>
 </div>
 <p>As you can see, this site is still under constructrion. 
@@ -42,7 +49,13 @@
       <h2>Saved Models</h2>
       <p>You can find the previous models in this page.</p>
       <a href="{{ url_for('saved_models_dir') }}" class="btn btn-outline-secondary" type="button">Models</a>
+    </div>
+  </div>
+  <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+    <div class="h-60 p-5 bg-light border rounded-3">
+      <h2>Experiment History</h2>
+      <p>You can find the previous experiment results in this page.</p>
+      <a href="{{ url_for('view_experiment_history') }}" class="btn btn-outline-secondary" type="button">History</a>
   </div>
 </div>
-  </div>
 {% endblock %}

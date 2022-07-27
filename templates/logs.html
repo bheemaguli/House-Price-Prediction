@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<title>Logs</title>
+{% endblock %}
+
 {% block content %}
 <head>
   <meta charset="UTF-8" />
@@ -51,8 +55,11 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
       $(document).ready(function () {
-        $('#datatable').DataTable();
-      });
+          $('#datatable').DataTable({
+              "scrollX": true
+          });
+          $('.dataTables_length').addClass('bs-select');
+        });
     </script>
   </body>
 {% endblock %}

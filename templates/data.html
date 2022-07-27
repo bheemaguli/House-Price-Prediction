@@ -30,5 +30,19 @@
           <a href="{{ url_for('render_artifact_dir') }}" class="btn btn-outline-secondary" type="button">Artifacts</a>
         </div>
     </div>
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+      <div class="h-60 p-5 bg-light border rounded-3">
+        <h2>Estimate House Price</h2>
+        <p>You can visit this page to get the estimated price for your custom input.</p>
+        <a href="{{ url_for('predict') }}" class="btn btn-outline-secondary" type="button">Estimate</a>
+      </div>
+  </div>
+  <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+    <div class="h-60 p-5 bg-light border rounded-3">
+      <h2>Saved Models</h2>
+      <p>You can find the previous models in this page.</p>
+      <a href="{{ url_for('saved_models_dir') }}" class="btn btn-outline-secondary" type="button">Models</a>
+  </div>
+</div>
   </div>
 {% endblock %}

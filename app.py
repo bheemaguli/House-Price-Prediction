@@ -110,7 +110,7 @@ def train():
     return render_template('train.html', context=context)
 
 
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/data/predict', methods=['GET', 'POST'])
 def predict():
     context = {
         HOUSING_DATA_KEY: None,
@@ -149,8 +149,8 @@ def predict():
     return render_template("predict.html", context=context)
 
 
-@app.route('/data/saved_models', defaults={'req_path': 'saved_models'})
-@app.route('/data/saved_models/<path:req_path>')
+@app.route('/saved_models', defaults={'req_path': 'saved_models'})
+@app.route('/saved_models/<path:req_path>')
 def saved_models_dir(req_path):
     os.makedirs("saved_models", exist_ok=True)
     print(f"req_path: {req_path}")
@@ -169,7 +169,7 @@ def saved_models_dir(req_path):
         "parent_folder": os.path.dirname(abs_path),
         "parent_label": abs_path
     }
-    return render_template('saved_models_files.html', result=result)
+    return render_template('saved_models.html', result=result)
 
 
 @app.route("/data/update_model_config", methods=['GET', 'POST'])

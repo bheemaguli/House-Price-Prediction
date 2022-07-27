@@ -14,8 +14,8 @@ Project Roadmap
 - [x] Setup Model Evaluation Process
 - [x] Setup Model Pusher Process
 - [ ] Setup Home Page
-- [ ] Setup Forms Page to take user input and provide prediction
-- [ ] Setup Folder Navigation in Website
+- [x] Setup Forms Page to take user input and provide prediction
+- [x] Setup Folder Navigation in Website
 - [ ] Setup Documentation Page in Website
 
 

@@ -11,8 +11,8 @@ from flask import Flask, render_template, url_for, redirect, request, \
 from flask_bootstrap import Bootstrap5
 from matplotlib.style import context
 import os, sys
-import json
 import sys
+import ast
 
 ROOT_DIR = os.getcwd()
 LOG_FOLDER_NAME = "logs"
@@ -176,16 +176,25 @@ def saved_models_dir(req_path):
 @app.route("/update_model_config", methods=['GET', 'POST'])
 def update_model_config():
     try:
+        message = ""
         if request.method == 'POST':
             model_config = request.form['new_model_config']
+            model_config = model_config.strip()
             model_config = model_config.replace("'", '"')
+            if len(model_config) > 0:
+                try:
+                    model_config = ast.literal_eval(model_config)
+                    message = "Model configuration updated successfully."
+                    write_yaml_file(file_path=MODEL_CONFIG_FILE_PATH, data=model_config)
+                except:
+                    message = "Model configuration is invalid."
+            else:
+                message = "No model configuration input was given."
             print(model_config)
-            model_config = json.loads(model_config)
 
-            write_yaml_file(file_path=MODEL_CONFIG_FILE_PATH, data=model_config)
 
         model_config = read_yaml_file(file_path=MODEL_CONFIG_FILE_PATH)
-        return render_template('update_model.html', result={"model_config": model_config})
+        return render_template('update_model.html', result={"model_config": model_config}, message=message)
 
     except  Exception as e:
         logging.exception(e)

@@ -103,6 +103,6 @@ def write_yaml_file(file_path:str,data:dict=None):
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path,"w") as yaml_file:
             if data is not None:
-                yaml.dump(data,yaml_file)
+                yaml.dump(data,yaml_file, default_flow_style=False)
     except Exception as e:
         raise HousingException(e,sys)

@@ -38,11 +38,15 @@ def index():
 
 @app.route('/roadmap', methods=['GET'])
 def roadmap():
-    return render_template('roadmap.html')
+    return render_template('Components/roadmap.html')
 
 @app.route('/data', methods=['GET'])
 def data():
-    return render_template('data.html')
+    return render_template('Components/data.html')
+
+@app.route('/model', methods=['GET'])
+def model():
+    return render_template('Components/model.html')
 
 @app.route('/eda', methods=['GET'])
 def eda():
@@ -50,11 +54,15 @@ def eda():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html', e=e)
+    return render_template('Error/404.html', e=e)
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('500.html', e=e)
+    return render_template('Error/500.html', e=e)
+
+@app.route('/data/artifact')
+def data_artifact():
+    return redirect('/artifact')
 
 @app.route('/artifact', defaults={'req_path': 'housing'})
 @app.route('/artifact/<path:req_path>')
@@ -83,19 +91,24 @@ def render_artifact_dir(req_path):
         "parent_folder": os.path.dirname(abs_path),
         "parent_label": abs_path
     }
-    return render_template('files.html', result=result)
+    return render_template('Components/Data/files.html', result=result)
 
-@app.route('/view_experiment_hist', methods=['GET', 'POST'])
+@app.route('/model/view_experiment_hist', methods=['GET', 'POST'])
 def view_experiment_history():
     pipeline = Pipeline(config=Configuartion(current_time_stamp=get_current_time_stamp()))
     experiment_df = pipeline.get_experiments_status()
+    message = "If training has been initiated, refresh the page to get the \
+        latest result. Training usually takes above 50s to complete depending on \
+        training parameters provided."
+    
     context = {
-        "experiment": list(experiment_df.itertuples(index=False, name=None))
+        "experiment": list(experiment_df.itertuples(index=False, name=None)),
+        "message": message
     }
-    return render_template('experiment_history.html', context=context)
+    return render_template('Components/Model/experiment_history.html', context=context)
 
 
-@app.route('/train', methods=['GET', 'POST'])
+@app.route('/model/train', methods=['GET', 'POST'])
 def train():
     message = ""
     pipeline = Pipeline(config=Configuartion(current_time_stamp=get_current_time_stamp()))
@@ -105,10 +118,9 @@ def train():
     else:
         message = "Training is already in progress."
     context = {
-        "experiment": pipeline.get_experiments_status().to_html(classes='table table-striped col-12'),
         "message": message
     }
-    return render_template('train.html', context=context)
+    return render_template('Components/Model/train.html', context=context)
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -146,8 +158,8 @@ def predict():
             HOUSING_DATA_KEY: housing_data.get_housing_data_as_dict(),
             MEDIAN_HOUSING_VALUE_KEY: median_housing_value,
         }
-        return render_template('predict.html', context=context)
-    return render_template("predict.html", context=context)
+        return render_template('Components/predict.html', context=context)
+    return render_template("Components/predict.html", context=context)
 
 
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
@@ -170,10 +182,10 @@ def saved_models_dir(req_path):
         "parent_folder": os.path.dirname(abs_path),
         "parent_label": abs_path
     }
-    return render_template('saved_models.html', result=result)
+    return render_template('Components/Data/saved_models.html', result=result)
 
 
-@app.route("/update_model_config", methods=['GET', 'POST'])
+@app.route("/model/update_model_config", methods=['GET', 'POST'])
 def update_model_config():
     try:
         message = ""
@@ -194,14 +206,14 @@ def update_model_config():
 
 
         model_config = read_yaml_file(file_path=MODEL_CONFIG_FILE_PATH)
-        return render_template('update_model.html', result={"model_config": model_config}, message=message)
+        return render_template('Components/Model/update_model.html', result={"model_config": model_config}, message=message)
 
     except  Exception as e:
         logging.exception(e)
         return str(e)
 
 
-@app.route(f'/logs', defaults={'req_path': f'{LOG_FOLDER_NAME}'})
+@app.route(f'/data/logs', defaults={'req_path': f'{LOG_FOLDER_NAME}'})
 @app.route(f'/{LOG_FOLDER_NAME}/<path:req_path>')
 def render_log_dir(req_path):
     os.makedirs(LOG_FOLDER_NAME, exist_ok=True)
@@ -218,7 +230,7 @@ def render_log_dir(req_path):
         "parent_folder": os.path.dirname(abs_path),
         "parent_label": abs_path
     }
-    return render_template('logs.html', result=result)
+    return render_template('Components/Data/logs.html', result=result)
     
 if __name__ == '__main__':
     app.run()

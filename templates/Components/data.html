@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Project Data</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <a class="btn btn-info" type="button" href="{{ url_for('index') }}" style="margin-bottom:20px;margin-top: 30px;">
+    <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
+  Home</a>
+<div class="page-header">
+    <h1>Hello, Stranger!</h1>
+</div>
+<p>In this page, you can find files created during the training procecss of the modedl. Click the relevant
+  button to view and download the files. 
+</p>
+</div>
+<div class="container py-4">
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+        <div class="h-60 p-5 bg-light border rounded-3">
+          <h2>Project Logs</h2>
+          <p>You can find the logs of the model training runs in the link below.</p>
+          <a href="{{ url_for('render_log_dir') }}" class="btn btn-outline-secondary" type="button">Logs</a>
+        </div>
+    </div>
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+        <div class="h-60 p-5 bg-light border rounded-3">
+          <h2>Project Artifact Data</h2>
+          <p>You can find the project artifact data that was crerated during the training of model.</p>
+          <a href="{{ url_for('data_artifact') }}" class="btn btn-outline-secondary" type="button">Artifacts</a>
+        </div>
+    </div>
+    <div class="row align-items-md-stretch" style="margin-bottom:20px;">
+      <div class="h-60 p-5 bg-light border rounded-3">
+        <h2>Saved Models</h2>
+        <p>You can find the previous models in this page.</p>
+        <a href="{{ url_for('saved_models_dir') }}" class="btn btn-outline-secondary" type="button">Models</a>
+      </div>
+    </div>
+</div>
+{% endblock %}

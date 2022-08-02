@@ -29,9 +29,12 @@
       
       <body>
         <div class="container mt-4">
-            <a class="btn btn-info" type="button" href="{{ url_for('data') }}" style="margin-bottom:20px;">
+            <a class="btn btn-info" type="button" href="{{ url_for('model') }}" style="margin-bottom:20px;">
               <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
               Back</a>
+            <div class="alert alert-primary" role="alert">
+                {{ context['message']}}
+            </div>
             <table
               id="datatable"
               class="table table-striped"
@@ -71,7 +74,8 @@
           <script>
             $(document).ready(function () {
                 $('#datatable').DataTable({
-                    "scrollX": true
+                    "scrollX": true,
+                    order: [[9, 'desc']],
                 });
                 $('.dataTables_length').addClass('bs-select');
                 });

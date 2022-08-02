@@ -10,30 +10,26 @@
     <h1>Hello, Stranger!</h1>
 </div>
 <p>Welcome to Housing Price Prediction Project.</p>
-<p>As you can see, this site is still under constructrion. 
-    In the mean time, you can visit the 
-    <a href="{{ url_for('roadmap') }}" class="link-info">roadmap</a>
-     page to see the project progress 
-    or see the code at my
-    <a href="https://github.com/bheemaguli/House-Price-Prediction" class="link-info" target="_blank">github</a>.
+<p>I'm happy to inform you that the project is in final stage. Except for project documentation and detailed
+  Data Analysis Report, all backend and frontend process has been completed. You can click relavent links to browse through
+  the website. Current progress can be tracked at my 
+  <a href="https://github.com/bheemaguli/House-Price-Prediction" class="link-info" target="_blank">github</a> page 
+  or in the <a href="{{ url_for('roadmap') }}" class="link-info">roadmap page here</a>.
 </p>
 
 <a>All current project links are as follows</a>
 <div class="btn-toolbar" role="toolbar">
     <div class="btn-group mr-2" role="group" style="margin-right: 10px;">
-      <a type="button" class="btn btn-secondary" href="{{ url_for('render_log_dir') }}">Logs</a>
+      <a type="button" class="btn btn-secondary" href="{{ url_for('predict') }}">Predict</a>
     </div>
     <div class="btn-group mr-2" role="group" style="margin-right: 10px;">
-      <a type="button" class="btn btn-secondary" href="{{ url_for('render_artifact_dir') }}">Artifacts</a>
+      <a type="button" class="btn btn-secondary" href="{{ url_for('model') }}">Model Train</a>
     </div>
     <div class="btn-group" role="group" style="margin-right: 10px;">
-        <a type="button" class="btn btn-secondary" href="{{ url_for('predict') }}">Estimate</a>
+        <a type="button" class="btn btn-secondary" href="{{ url_for('data') }}">Training Data</a>
     </div>
     <div class="btn-group" role="group" style="margin-right: 10px;">
-        <a type="button" class="btn btn-secondary" href="{{ url_for('saved_models_dir') }}">Saved Models</a>
-    </div>
-    <div class="btn-group" role="group" style="margin-right: 10px;">
-        <a type="button" class="btn btn-secondary" href="{{ url_for('view_experiment_history') }}">Experiment History</a>
+        <a type="button" class="btn btn-secondary" href="{{ url_for('eda') }}">EDA</a>
     </div>
   </div>
 </div>

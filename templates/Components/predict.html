@@ -6,30 +6,30 @@
 
 {% block content %}
 <div class="container">
-    <a class="btn btn-info" type="button" href="{{ url_for('data') }}" style="margin-bottom:20px;margin-top: 30px;">
+    <a class="btn btn-info" type="button" href="{{ url_for('index') }}" style="margin-bottom:20px;margin-top: 30px;">
         <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
     Back</a>
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
-        <form action="/data/predict" method="post">
+        <form action="/predict" method="post">
             <legend>Housing Estimation Form</legend>
             <div class="mb-3">
-                <label class="form-label">Longitude</label>
+                <label class="form-label">Longitude (Between -124.35 and -114.31)</label>
                 <input class="form-control" type="text" name="longitude" placeholder="Enter a value of longitude"
                     required />
             </div>
             <div class="mb-3">
-                <label class="form-label">Latitude</label>
+                <label class="form-label">Latitude (Between 32.54 and 41.95)</label>
                 <input class="form-control" type="text" name="latitude" placeholder="Enter a value of latitude"
                     required />
             </div>
             <div class="mb-3">
-                <label class="form-label">House Median Age</label>
+                <label class="form-label">House Median Age (Under 60yrs)</label>
                 <input class="form-control" type="text" name="housing_median_age"
                     placeholder="Enter a value of housing_median_age" />
             </div>
             <div class="mb-3">
-                <label class="form-label">Total Rooms</label>
+                  <label class="form-label">Total Rooms</label>
                 <input class="form-control" type="text" name="total_rooms" placeholder="Enter a value of total_rooms"
                     required />
             </div>

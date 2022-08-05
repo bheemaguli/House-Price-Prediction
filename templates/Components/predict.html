@@ -95,17 +95,12 @@
             <tr>
                 <th>Input Feature</th>
                 <th>Feature Value</th>
-
             </tr>
             {% for column,value in context['housing_data'].items() %}
-
-
-
-            <tr>
-                <td>{{column}}</td>
-                <td>{{value[0]}}</td>
-            </tr>
-
+                <tr>
+                    <td>{{column}}</td>
+                    <td>{{value[0]}}</td>
+                </tr>
             {% endfor %}
             <tr>
 

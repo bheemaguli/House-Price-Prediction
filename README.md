@@ -13,9 +13,11 @@ Project Roadmap
 - [x] Setup Model Training Process
 - [x] Setup Model Evaluation Process
 - [x] Setup Model Pusher Process
-- [ ] Setup Home Page
 - [x] Setup Forms Page to take user input and provide prediction
 - [x] Setup Folder Navigation in Website
+- [x] Setup Restful API for Prediction
+- [ ] EDA Documentation
+- [ ] Setup Home Page
 - [ ] Setup Documentation Page in Website
 
 

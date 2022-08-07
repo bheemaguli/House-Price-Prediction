@@ -7,9 +7,10 @@ from housing.entity.housing_predictor import HousingPredictor, HousingData
 from housing.util.util import read_yaml_file, write_yaml_file
 
 from flask import Flask, render_template, url_for, redirect, request, \
-    send_file, abort
+    send_file, abort, jsonify
 from flask_bootstrap import Bootstrap5
 from matplotlib.style import context
+from flask_restful import Resource, Api
 import os, sys
 import sys
 import ast
@@ -27,7 +28,8 @@ MEDIAN_HOUSING_VALUE_KEY = "median_house_value"
 
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
-
+api = Api(app)
+  
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -161,6 +163,54 @@ def predict():
         return render_template('Components/predict.html', context=context)
     return render_template("Components/predict.html", context=context)
 
+@app.route('/docs/api', methods=['GET'])
+def api_documentation():
+    return render_template('Components/api_documentation.html')
+
+class PredictAPI(Resource):
+    def get(self):
+  
+        return jsonify({'message': 'Provide Input Data in the specified format as in /docs/api'})
+  
+    def post(self):
+        
+        input_json = request.get_json(force=True) 
+
+        longitude = float(input_json['longitude'])
+        latitude = float(input_json['latitude'])
+        housing_median_age = float(input_json['housing_median_age'])
+        total_rooms = float(input_json['total_rooms'])
+        total_bedrooms = float(input_json['total_bedrooms'])
+        population = float(input_json['population'])
+        households = float(input_json['households'])
+        median_income = float(input_json['median_income'])
+        ocean_proximity = input_json['ocean_proximity']
+
+        housing_data = HousingData(longitude=longitude,
+                                   latitude=latitude,
+                                   housing_median_age=housing_median_age,
+                                   total_rooms=total_rooms,
+                                   total_bedrooms=total_bedrooms,
+                                   population=population,
+                                   households=households,
+                                   median_income=median_income,
+                                   ocean_proximity=ocean_proximity,
+                                   )
+        housing_df = housing_data.get_housing_input_data_frame()
+        housing_predictor = HousingPredictor(model_dir=MODEL_DIR)
+        median_housing_value = [housing_predictor.predict(X=housing_df)[0]]
+        api_result = {}
+        api_result = housing_data.get_housing_data_as_dict()
+        api_result['median_house_value'] = median_housing_value
+        
+        for key, value in api_result.items():
+            api_result[key] = value[0]
+
+        response = jsonify(api_result)
+        response.status_code = 200
+        return response
+  
+api.add_resource(PredictAPI, '/api')
 
 @app.route('/saved_models', defaults={'req_path': 'saved_models'})
 @app.route('/saved_models/<path:req_path>')

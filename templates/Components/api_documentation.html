@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>API Documentation</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <a class="btn btn-info" type="button" href="{{ url_for('index') }}" style="margin-bottom:20px;margin-top: 30px;">
+        <img src="{{ url_for('static', filename='arrow-left.svg') }}" alt="icon" width="25" height="25" style="margin-right:10px;">
+        Home
+    </a>
+
+    <div class="row">
+        
+    <h1>How to Use Our REST API?</h1>
+
+    <p class="text-right"> Housing Prediciton API (Application Programming Interfaces) predicts the median 
+        house price for the given input. Behind this API is a pretrained model optimized for accurate price 
+        prediction. The API can be interfaced at <a href="{{ url_for('index')}}api" 
+        class="text-decoration-none">host-link.com/api</a>
+    </p>
+
+    <h4>What is a REST API, anyway?</h4>
+
+    <p class="text-right">API is short for 'Application Programming Interface'. An API is a set of rules 
+        that lets programs talk to each other, exposing data and functionality across the Internet in a 
+        consistent format.
+    </p>
+    <p class="text-right">REST stands for <a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm" 
+        class="text-decoration-none">'Representational State Transfer'</a>. This is an architectural pattern 
+        that describes how distributed systems can expose a consistent interface. When people use the term 
+        'REST API', they are generally referring to an API accessed using the HTTP protocol at a predefined 
+        set of URLs.
+    </p>
+
+    <h4>How to use Housing Prediction API?</h4>
+    <p class="text-right">The format for the POST request is as shown below in the box. It is assumed that all the parameters 
+        has valid values during request. The model is trained for California Housing Prices. thus, it is expected that the
+        input provided is relevant to California state. The result will be input as well as the 'median_housing_value'.
+    </p>
+    <p class="text-right" style="margin-top:30px;">
+        Following are the acceptable parameters for the REST API POST request:
+    </p>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Key</th>
+            <th scope="col">Acceptable Value Range</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <th scope="row">1</th>
+                <td>longitude</td>
+                <td>Between -124.35 and -114.31</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>latitude</td>
+                <td>Between 32.54 and 41.95</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>housing_median_age</td>
+                <td>Under 60yrs</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>total_rooms</td>
+                <td>Give sensible value</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>total_bedrooms</td>
+                <td>Give sensible value</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>population</td>
+                <td>Give sensible value</td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>households</td>
+                <td>Give sensible value</td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>median_income</td>
+                <td>Give sensible value</td>
+            </tr>
+            <tr>
+                <th scope="row">9</th>
+                <td>ocean_proximity</td>
+                <td>Provide value from following options (Please provide the exact value, input is case-sensitive)
+                    <select class="form-control" name="ocean_proximity" placeholder="Enter a value of ocean_proximity"
+                    required>
+
+                    <option value="<1H OCEAN">
+                        &lt;1H OCEAN
+                    </option>
+                    <option value="INLAND">
+                        INLAND
+                    </option>
+                    <option value="NEAR BAY">
+                        NEAR BAY
+                    </option>
+                    <option value="NEAR OCEAN">
+                        NEAR OCEAN
+                    </option>
+                    <option value="ISLAND">
+                        ISLAND
+                    </option>
+
+                </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="form-outline" style="margin-top: 30px;">
+        <h4>Sample Input</h4>
+        <textarea class="form-control" id="textarea" name="api_example" rows="11">
+            {
+                "longitude": "-120.00",
+                "latitude": "40.00",
+                "housing_median_age": "40",
+                "total_rooms": "10",
+                "total_bedrooms": "5",
+                "population": "250",
+                "households": "80",
+                "median_income": "100000",
+                "ocean_proximity": "NEAR OCEAN"
+            }
+        </textarea> 
+        <div class="align-items-end">
+            <a class="btn btn-info" type="button" onclick="copy()" style="margin-bottom:20px;margin-top: 10px;">Copy</a>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top:30px;margin-bottom:30px;">
+        <h4>Here is a example of the expected output for correct input:</h4>
+        <img src="{{ url_for('static', filename='images/api_example.png') }}" class="img-fluid" alt="Responsive image">
+    </div>
+
+    </div> 
+
+    <script>
+        function copy() {
+            let textarea = document.getElementById("textarea");
+            textarea.select();
+            document.execCommand("copy");
+        }
+    </script>
+</div>
+{% endblock %}

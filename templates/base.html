@@ -1,27 +1,24 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        {% block head %}
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel = "icon" href ="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-        
-        {% block styles %}
-        <!-- Bootstrap CSS -->
-        {{ bootstrap.load_css() }}
-        {% endblock %}
-        
-        {% block title %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block title %}
         <title>House Price Prediction</title>
-        {% endblock %}
+    {% endblock %}
 
-        {% endblock %}
+    <link rel = "icon" href ="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
-        {% block navbar %}
-        <!-- Image and text -->
-        <nav class="navbar navbar-light navbar-static-top" style="background-color: #751cbe;" role="navigation">
-            <div class="container">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">    
+</head>
+
+<header>
+    <nav class="navbar navbar-light navbar-static-top navbar-expand-md" style="background-color: #751cbe;" role="navigation">
+        <div class="container-fluid">
+
+            <!-- Project Name -->
             <a class="navbar-brand" href="{{ url_for('index') }}" style="color: #ffffff">
                 <img
                 src="{{ url_for('static', filename='favicon.ico') }}"
@@ -32,33 +29,57 @@
                 />
                 House Price Prediction
             </a>
-            <div>
-                <a href="{{ url_for('predict') }}" class="btn btn-info" role="button" style="margin-right:10px">
-                    Predict
-                </a>
-                <a href="{{ url_for('model') }}" class="btn btn-info" role="button" style="margin-right:10px">
-                    Model Train
-                </a>
-                <a href="{{ url_for('data') }}" class="btn btn-info" role="button" style="margin-right:10px">
-                    Training Data
-                </a>
-                <a href="{{ url_for('eda') }}" class="btn btn-info" role="button" style="margin-right:10px">
-                    EDA
-                </a>
-                <a href="{{ url_for('api_documentation') }}" class="btn btn-info" role="button" style="margin-right:10px">
-                    API
-                </a>
-            </div>
-            </div>
-        </nav>
-        {% endblock %}
-    </head>
-    <body>
-        <!-- Your page content -->
-        {% block content %}{% endblock %}
 
-        <!--{% block scripts %}
-            {{ bootstrap.load_js() }}
-        {% endblock %}-->
-    </body>
+            <!-- Collapsable navbar button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <!-- Navbar items -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a href="{{ url_for('predict') }}" class="btn btn-info ms-2 my-1" role="button">
+                                Predict
+                            </a>
+                        </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('model') }}" class="btn btn-info ms-2 my-1" role="button">
+                        Model Train
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('data') }}" class="btn btn-info ms-2 my-1" role="button">
+                        Training Data
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('eda') }}" class="btn btn-info ms-2 my-1" role="button">
+                        EDA
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('api_documentation') }}" class="btn btn-info ms-2 my-1" role="button">
+                        API
+                    </a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+
+    <main>
+       <!-- PAGE Content --> 
+       <div class="container">
+           {% block content %}{% endblock %}   
+        </div>
+    </main>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
 </html>
